@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/pavle-goloskokovic/phaser-typescript-boilerplate/issues"
   },
-  "homepage": "https://github.com/pavle-goloskokovic/phaser-typescript-boilerplate#readme"
+  "homepage": "https://github.com/pavle-goloskokovic/phaser-typescript-boilerplate#readme",
+  "dependencies": {
+    "phaser": "^2.6.2"
+  }
 }

@@ -6,6 +6,9 @@
     "removeComments": true,
     "sourceMap": true,
     "outDir": "./dist/",
-    "allowJs": true
+    "allowJs": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   }
 }

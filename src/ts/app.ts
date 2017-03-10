@@ -1,7 +1,6 @@
-import * as _ from 'lodash'
 import 'pixi.js'
-import 'p2'
-import * as Phaser from 'phaser'
+import 'phaser'
+import * as _ from 'lodash'
 import * as logger from 'js-logger'
 
 import * as appConfig from './app.config'

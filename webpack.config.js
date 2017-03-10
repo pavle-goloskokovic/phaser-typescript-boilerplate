@@ -17,22 +17,18 @@ module.exports = {
             ],
             loader: 'ts-loader'
         }, {
-            test: /pixi\.js/,
+            test: /pixi\.js$/,
             loader: 'expose-loader?PIXI'
         }, {
-            test: /phaser-split\.js$/,
+            test: /phaser-arcade-physics\.js$/,
             loader: 'expose-loader?Phaser'
-        }, {
-            test: /p2\.js/,
-            loader: 'expose-loader?p2'
         }]
     },
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
-            'phaser': path.join(phaserModule, 'build', 'custom', 'phaser-split.js'),
             'pixi.js': path.join(phaserModule, 'build', 'custom', 'pixi.js'),
-            'p2': path.join(phaserModule, 'build', 'custom', 'p2.js')
+            'phaser': path.join(phaserModule, 'build', 'custom', 'phaser-arcade-physics.js')
         }
     },
     devtool: 'source-map',

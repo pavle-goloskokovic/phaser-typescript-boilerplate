@@ -1,5 +1,4 @@
 import * as logger from 'js-logger'
-import * as Phaser from 'phaser'
 
 export default class Game extends Phaser.State {
 

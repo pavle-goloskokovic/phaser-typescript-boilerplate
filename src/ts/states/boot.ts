@@ -1,5 +1,4 @@
 import Stats = require('stats.js')
-import * as Phaser from 'phaser'
 import * as logger from 'js-logger'
 import * as appConfig from '../app.config'
 

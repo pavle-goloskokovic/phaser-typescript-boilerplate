@@ -39,7 +39,6 @@
     "stats.js": "^0.17.0"
   },
   "devDependencies": {
-    "source-map-loader": "^0.1.6",
     "ts-loader": "^2.0.1",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1",

@@ -34,7 +34,7 @@ export default class Boot extends Phaser.State {
   // TODO make stats a decorator of game.update in app.ts
   addStats () {
 
-    var stats = new Stats();
+    let stats = new Stats();
 
     stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
     document.getElementById('container').appendChild(stats.dom);
@@ -48,7 +48,7 @@ export default class Boot extends Phaser.State {
     // In order to correctly monitor FPS
     // we have to make calls to the stats package
     // before and after Phaser's update.
-    var oldUpdate = this.game.update;
+    let oldUpdate = this.game.update;
     this.game.update = (time: number): void => {
       stats.begin();
       oldUpdate(time);

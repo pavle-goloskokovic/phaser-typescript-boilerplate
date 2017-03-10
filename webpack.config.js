@@ -1,8 +1,7 @@
 var path = require('path');
-var webpack = require('webpack');
 
 module.exports = {
-    entry: "./src/ts/app.ts",
+    entry: path.resolve(__dirname, "src", "ts", "app.ts"),
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js"
@@ -21,6 +20,6 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
-        //new webpack.optimize.UglifyJsPlugin()
+
     ]
 };

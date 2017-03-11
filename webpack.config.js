@@ -1,13 +1,17 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const phaserModule = path.join(__dirname, 'node_modules', 'phaser');
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src', 'ts', 'app.ts'),
+    entry: {
+        vendor: ['pixi.js', 'phaser', 'lodash', 'js-logger', 'stats.js'],
+        app: path.resolve(__dirname, 'src', 'ts', 'app.ts')
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: '[chunkhash].[name].js'
     },
     module: {
         rules: [{
@@ -15,7 +19,7 @@ module.exports = {
             include: [
                 path.resolve(__dirname, 'src', 'ts')
             ],
-            loader: 'ts-loader'
+            loader: 'awesome-typescript-loader'
         }, {
             test: /pixi\.js$/,
             loader: 'expose-loader?PIXI'
@@ -33,6 +37,14 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            //  filename: "vendor.js",
+            // (Give the chunk a different name)
+            minChunks: Infinity
+            // (with more entries, this ensures that no other module
+            //  goes into the vendor chunk)
+        }),
         new HtmlWebpackPlugin()
     ]
 };

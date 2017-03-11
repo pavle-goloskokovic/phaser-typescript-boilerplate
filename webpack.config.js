@@ -11,7 +11,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[chunkhash].[name].js'
+        // TODO make production webpack config with [chunkhash] in filename
+        filename: '[name].js'
     },
     module: {
         rules: [{
@@ -19,7 +20,7 @@ module.exports = {
             include: [
                 path.resolve(__dirname, 'src', 'ts')
             ],
-            loader: 'awesome-typescript-loader'
+            loader: 'ts-loader'
         }, {
             test: /pixi\.js$/,
             loader: 'expose-loader?PIXI'

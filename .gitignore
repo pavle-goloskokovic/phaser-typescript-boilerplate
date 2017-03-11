@@ -40,5 +40,3 @@ jspm_packages
 .idea
 
 dist/
-typings/*/
-.awcache/

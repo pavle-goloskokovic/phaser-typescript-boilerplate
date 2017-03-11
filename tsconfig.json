@@ -10,8 +10,5 @@
     "typeRoots": [
       "node_modules/@types"
     ]
-  },
-  "awesomeTypescriptLoaderOptions": {
-    "useCache": true
   }
 }

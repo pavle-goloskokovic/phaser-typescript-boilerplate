@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const phaserModule = path.join(__dirname, 'node_modules', 'phaser');
 
@@ -46,6 +47,10 @@ module.exports = {
             // (with more entries, this ensures that no other module
             //  goes into the vendor chunk)
         }),
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin(),
+        new CopyWebpackPlugin([{
+            from: 'assets',
+            to: 'assets'
+        }])
     ]
 };

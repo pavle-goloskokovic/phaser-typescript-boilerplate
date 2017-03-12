@@ -7,12 +7,12 @@ export default class Preloader extends Phaser.State {
 
     // TODO preload assets
 
-    this.game.load.image('logo', 'images/phaser.png');
-
+    this.game.load.image('logo', 'assets/images/logo.png');
   }
 
   create () {
     logger.info('Preloader leave');
+
     this.game.state.start('game');
   }
 

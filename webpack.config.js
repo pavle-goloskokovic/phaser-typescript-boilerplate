@@ -1,9 +1,12 @@
+const pkg = require('./package.json');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackBannerPlugin = require('html-webpack-banner-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const phaserModule = path.join(__dirname, 'node_modules', 'phaser');
+const banner = '\nCopyright (c) ' + new Date().getFullYear() + ' ' + pkg.author + '\n';
 
 module.exports = {
     entry: {
@@ -51,6 +54,10 @@ module.exports = {
             // (with more entries, this ensures that no other module
             //  goes into the vendor chunk)
         }),
+        new webpack.BannerPlugin({
+            banner: banner,
+            entryOnly: true
+        }),
         new HtmlWebpackPlugin({
             title: 'TODO add title or convert to .ts', //appConfig.title,
             template: './src/templates/index.pug',
@@ -60,7 +67,7 @@ module.exports = {
                 analyticsId: 'UA-000000-2' // TODO read form app config or remove it from app config
             },
             //minify: false
-            /*minify: { // TODO use for production
+            minify: { // TODO use for production
                 removeComments: true,
                 collapseWhitespace: true,
                 conservativeCollapse: true,
@@ -68,7 +75,10 @@ module.exports = {
                     compress: false,
                     mangle: false
                 }
-            }*/
+            }
+        }),
+        new HtmlWebpackBannerPlugin({
+            banner: banner
         }),
         new CopyWebpackPlugin([{
             from: 'assets',

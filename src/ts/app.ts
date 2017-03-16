@@ -7,6 +7,7 @@ import * as appConfig from './app.config'
 import Boot from './states/boot'
 import Preloader from './states/preloader'
 import Game from "./states/game";
+import StatsPhaserGame from "./game/StatsPhaserGame";
 
 // Setup logger
 logger.useDefaults();
@@ -19,16 +20,25 @@ let states = {
     game: Game
 };
 
+// Define game config
+let config: Phaser.IGameConfig = {
+    width:    appConfig.size.x,
+    height:   appConfig.size.y,
+    renderer: Phaser.AUTO,
+    // parent id - '' means  no container
+    parent:   'container',
+    // should be optional but it isn't
+    // https://github.com/photonstorm/phaser/issues/2689
+    forceSetTimeOut: false
+};
+
 // Init game
-let game = new Phaser.Game(
-    appConfig.size.x,   // width
-    appConfig.size.y,   // height
-    Phaser.AUTO,        // renderer
-    'container'/*,      // parent id - '' means no container
-    null,               // state
-    true,               // transparent
-    false             */// antialias 
-);
+let game: Phaser.Game;
+if(appConfig.stats){
+    game = new StatsPhaserGame(config);
+} else {
+    game = new Phaser.Game(config);
+}
 
 // Automatically register each state.
 _.each(states, function(state, key) {

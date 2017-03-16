@@ -1,16 +1,10 @@
-import Stats = require('stats.js')
 import * as logger from 'js-logger'
 import * as appConfig from '../app.config'
 
 export default class Boot extends Phaser.State {
 
   create() {
-
     logger.info('Boot enter');
-
-    if(appConfig.stats){
-      this.addStats();
-    }
 
     this.game.sound.mute = appConfig.mute;
 
@@ -26,33 +20,7 @@ export default class Boot extends Phaser.State {
     this.handleFullScreen();
 
     logger.info('Boot leave');
-
     this.game.state.start('preloader');
-  }
-
-  // TODO make stats a decorator of game.update in app.ts
-  addStats () {
-
-    let stats = new Stats();
-
-    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.getElementById('container').appendChild(stats.dom);
-
-    /*
-     stats.dom.style.position = 'absolute';
-     stats.dom.style.right = '0px';
-     stats.dom.style.top = '0px';
-     */
-
-    // In order to correctly monitor FPS
-    // we have to make calls to the stats package
-    // before and after Phaser's update.
-    let oldUpdate = this.game.update;
-    this.game.update = (time: number): void => {
-      stats.begin();
-      oldUpdate(time);
-      stats.end();
-    }
   }
 
   handleOrientation () {

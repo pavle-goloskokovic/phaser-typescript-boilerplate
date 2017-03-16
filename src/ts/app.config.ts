@@ -2,7 +2,7 @@ import * as logger from 'js-logger'
 
 export const title = "Phaser TypeScript Boilerplate";
 export const mute = false;
-export const stats = false;
+export const stats = true;
 export const logLevel = logger.DEBUG;
 export const size: {
     readonly x:number

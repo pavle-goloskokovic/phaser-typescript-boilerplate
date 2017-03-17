@@ -1,5 +1,8 @@
+import '../style'
+
 import 'pixi.js'
 import 'phaser'
+
 import * as _ from 'lodash'
 import * as logger from 'js-logger'
 
@@ -25,12 +28,9 @@ let config: Phaser.IGameConfig = {
     width:    appConfig.size.x,
     height:   appConfig.size.y,
     renderer: Phaser.AUTO,
-    // parent id - '' means  no container
-    parent:   'container',
-    // should be optional but it isn't
-    // https://github.com/photonstorm/phaser/issues/2689
-    forceSetTimeOut: false
-};
+    parent:   'container',     // parent id - '' means  no container
+    forceSetTimeOut: false     // should be optional but it isn't
+};                             // https://github.com/photonstorm/phaser/issues/2689
 
 // Init game
 let game: Phaser.Game;

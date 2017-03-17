@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackBannerPlugin = require('html-webpack-banner-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const phaserModule = path.join(__dirname, 'node_modules', 'phaser');
 const banner = '\nCopyright (c) ' + new Date().getFullYear() + ' ' + pkg.author + '\n';
@@ -35,16 +36,23 @@ module.exports = {
             test: /\.pug?$/,
             loader: 'pug-loader',
             query: { pretty: true }
+        }, {
+            test: /\.styl$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                //resolve-url-loader may be chained before stylus-loader if necessary
+                use: ['css-loader', 'stylus-loader']
+            })
         }]
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js', '.styl'],
         alias: {
             'pixi.js': path.join(phaserModule, 'build', 'custom', 'pixi.js'),
             'phaser': path.join(phaserModule, 'build', 'custom', 'phaser-arcade-physics.js')
         }
     },
-    devtool: 'source-map',
+    devtool: 'source-map', // TODO disable source maps for production
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
@@ -77,6 +85,7 @@ module.exports = {
                 }
             }
         }),
+        new ExtractTextPlugin('style.css'), // TODO add '[contenthash].' for production
         new HtmlWebpackBannerPlugin({
             banner: banner
         }),

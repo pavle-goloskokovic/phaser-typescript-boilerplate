@@ -1,29 +1,33 @@
-import '../style'
+/**
+ * App/game entry point
+ */
+
+import '../style' // loading stylus css
 
 import 'pixi.js'
-import 'phaser'
+import 'phaser' // loading Phaser with dependencies
 
 import * as _ from 'lodash'
 import * as logger from 'js-logger'
 
 import * as appConfig from './app.config'
+
+import PhaserStatsGame from "./game/PhaserStatsGame";
+
 import Boot from './states/boot'
 import Preloader from './states/preloader'
 import Game from "./states/game";
-import StatsPhaserGame from "./game/StatsPhaserGame";
 
-// Setup logger
+/**
+ * Setup logger
+ */
 logger.useDefaults();
 logger.setLevel(appConfig.logLevel);
 
-// Define states
-let states = {
-    boot: Boot,
-    preloader: Preloader,
-    game: Game
-};
-
-// Define game config
+/**
+ * Phaser game config
+ * @type {Phaser.IGameConfig}
+ */
 let config: Phaser.IGameConfig = {
     width:    appConfig.size.x,
     height:   appConfig.size.y,
@@ -32,16 +36,26 @@ let config: Phaser.IGameConfig = {
     forceSetTimeOut: false     // should be optional but it isn't
 };                             // https://github.com/photonstorm/phaser/issues/2689
 
-// Init game
+/**
+ * Phaser game instance
+ * Choosing implementation based on 'stats' app config setting
+ * @type {Phaser.Game}
+ */
 let game: Phaser.Game;
 if(appConfig.stats){
-    game = new StatsPhaserGame(config);
+    game = new PhaserStatsGame(config);
 } else {
     game = new Phaser.Game(config);
 }
 
-// Automatically register each state.
-_.each(states, function(state, key) {
+/**
+ * Registering game states
+ */
+_.each({
+    boot: Boot,
+    preloader: Preloader,
+    game: Game
+}, function(state, key) {
     game.state.add(key, state);
 });
 

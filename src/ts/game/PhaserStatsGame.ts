@@ -1,6 +1,10 @@
 import Stats = require('stats.js')
 
-export default class StatsPhaserGame extends Phaser.Game {
+/**
+ * Phaser game implementation
+ * which adds performance stats to the game
+ */
+export default class PhaserStatsGame extends Phaser.Game {
 
     private stats: Stats;
 

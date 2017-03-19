@@ -39,6 +39,7 @@
     "stats.js": "^0.17.0"
   },
   "devDependencies": {
+    "@types/node": "^7.0.8",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.27.3",
     "expose-loader": "^0.7.3",
@@ -52,6 +53,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-loader": "^2.0.2",
+    "ts-node": "^2.1.0",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"

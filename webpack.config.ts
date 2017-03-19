@@ -1,21 +1,22 @@
 const pkg = require('./package.json');
-const path = require('path');
+import * as appConfig  from './src/ts/app.config';
+import { join, resolve } from 'path';
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackBannerPlugin = require('html-webpack-banner-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const phaserModule = path.join(__dirname, 'node_modules', 'phaser');
+const phaserModule = join(__dirname, 'node_modules', 'phaser');
 const banner = '\nCopyright (c) ' + new Date().getFullYear() + ' ' + pkg.author + '\n';
 
 module.exports = {
     entry: {
         vendor: ['pixi.js', 'phaser', 'lodash', 'js-logger', 'stats.js'],
-        app: path.resolve(__dirname, 'src', 'ts', 'app.ts')
+        app: resolve(__dirname, 'src', 'ts', 'app.ts')
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: resolve(__dirname, 'dist'),
         // TODO make production webpack config with [chunkhash] in filename
         filename: '[name].js'
     },
@@ -23,7 +24,7 @@ module.exports = {
         rules: [{
             test: /\.ts?$/,
             include: [
-                path.resolve(__dirname, 'src', 'ts')
+                resolve(__dirname, 'src', 'ts')
             ],
             loader: 'ts-loader'
         }, {
@@ -48,8 +49,8 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.styl'],
         alias: {
-            'pixi.js': path.join(phaserModule, 'build', 'custom', 'pixi.js'),
-            'phaser': path.join(phaserModule, 'build', 'custom', 'phaser-arcade-physics.js')
+            'pixi.js': join(phaserModule, 'build', 'custom', 'pixi.js'),
+            'phaser': join(phaserModule, 'build', 'custom', 'phaser-arcade-physics.js')
         }
     },
     devtool: 'source-map', // TODO disable source maps for production
@@ -67,12 +68,11 @@ module.exports = {
             entryOnly: true
         }),
         new HtmlWebpackPlugin({
-            title: 'TODO add title or convert to .ts', //appConfig.title,
+            title: appConfig.title,
             template: './src/templates/index.pug',
             data: {
-                description: 'hell yeaaaah description', // TODO read from app config
-                analytics: true, // TODO enable only in production,
-                analyticsId: 'UA-000000-2' // TODO read form app config or remove it from app config
+                description: appConfig.description,
+                analyticsId: appConfig.analyticsId // TODO enable only in production,
             },
             //minify: false
             minify: { // TODO use for production

@@ -1,6 +1,12 @@
 import * as logger from 'js-logger'
 import * as appConfig from '../app.config'
 
+/**
+ * Boot Phaser game state.
+ *
+ * This is where we handle all Phaser specific stuff before we start loading assets
+ * and start dealing with game specific logic.
+ */
 export default class Boot extends Phaser.State {
 
   create() {
@@ -24,8 +30,9 @@ export default class Boot extends Phaser.State {
   }
 
   handleOrientation () {
-    if (!this.game.device.desktop 
-        && (appConfig.orientation.forceLandscape || appConfig.orientation.forcePortrait)) {
+    if (!this.game.device.desktop
+     && (appConfig.orientation.forceLandscape || appConfig.orientation.forcePortrait)) {
+
       this.scale.forceOrientation(
           appConfig.orientation.forceLandscape, 
           appConfig.orientation.forcePortrait
@@ -44,12 +51,13 @@ export default class Boot extends Phaser.State {
   }
 
   handleFullScreen () {
-    if (!this.game.device.desktop && this.scale.compatibility.supportsFullScreen) {
+    if (!this.game.device.desktop
+      && this.scale.compatibility.supportsFullScreen) {
+
       this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL ;
       this.game.scale.fullScreenTarget  = document.getElementById('container');
 
       //TODO handle full screen
-
     }
   }
 };

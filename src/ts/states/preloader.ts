@@ -1,5 +1,11 @@
 import * as logger from 'js-logger'
 
+/**
+ * Preloader Phaser state.
+ *
+ * This is where we load all the assets including images, sounds and all relevant data
+ * before starting the game.
+ */
 export default class Preloader extends Phaser.State {
 
   preload () {

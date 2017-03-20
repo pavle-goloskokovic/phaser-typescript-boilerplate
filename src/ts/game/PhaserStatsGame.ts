@@ -1,8 +1,7 @@
 import Stats = require('stats.js')
 
 /**
- * Phaser game implementation
- * which adds performance stats to the game
+ * Phaser game implementation which adds performance stats to the game.
  */
 export default class PhaserStatsGame extends Phaser.Game {
 

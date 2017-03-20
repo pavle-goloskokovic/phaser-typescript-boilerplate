@@ -42,7 +42,7 @@ let config: Phaser.IGameConfig = {
  * @type {Phaser.Game}
  */
 let game: Phaser.Game;
-if(appConfig.stats){
+if(appConfig.stats && process.env.NODE_ENV !== 'production'){
     game = new PhaserStatsGame(config);
 } else {
     game = new Phaser.Game(config);

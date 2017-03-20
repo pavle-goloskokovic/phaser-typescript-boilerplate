@@ -55,6 +55,9 @@ module.exports = {
     },
     devtool: 'source-map', // TODO disable source maps for production
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production') // TODO only in prod build
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
             //  filename: "vendor.js",

@@ -25,7 +25,7 @@ export const stats = true;
  * Setting defining the global logging filter level.
  * @type {ILogLevel}
  */
-export const logLevel = logger.DEBUG;
+export const logLevel = process.env.NODE_ENV !== 'production' ? logger.DEBUG : logger.ERROR;
 /**
  * Game dimensions
  * @type {{x: number; y: number}}

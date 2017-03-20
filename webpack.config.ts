@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackBannerPlugin = require('html-webpack-banner-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const phaserModule = join(__dirname, 'node_modules', 'phaser');
 const banner = '\nCopyright (c) ' + new Date().getFullYear() + ' ' + pkg.author + '\n';
@@ -95,6 +96,17 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: 'assets',
             to: 'assets'
-        }])
+        }]),
+        new ImageminPlugin({ // Make sure that the plugin is after any plugins that add images
+            //disable: process.env.NODE_ENV !== 'production', // TODO Disable during development
+            test: /\.png$/i,
+            optipng: {
+                optimizationLevel: 7,
+            },
+            pngquant: {
+                quality: '65-90',
+                speed: 4,
+            }
+        })
     ]
 };
